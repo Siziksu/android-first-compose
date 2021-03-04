@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Compose</string>
+
+    <string name="about">About</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="ghibli_films">Ghibli Films</string>
+    <string name="home">Home</string>
+    <string name="home_info">This is an example of a tabbed screen with three sections.</string>
+    <string name="info">Info</string>
+    <string name="location">Location</string>
+    <string name="location_not_retrieved">Location could not be retrieved.\nOr you do not have the Google Play Services available, or you need to activate the Location Permission in yur device.</string>
+</resources>

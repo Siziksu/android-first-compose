@@ -1,0 +1,53 @@
+buildscript {
+    ext {
+        version_major = 0
+        version_minor = 1 // Maximum 99
+        version_patch = 0 // Maximum 99
+        version_dev = 0 // Maximum 99
+
+        application_id = 'com.siziksu.first_compose'
+        compile_sdk_version = 30
+        min_sdk_version = 21
+        target_sdk_version = 30
+        version_code = version_major * 1000000 + version_minor * 10000 + version_patch * 100 + version_dev
+        version_name = "${version_major}.${version_minor}.${version_patch}"
+
+        kotlin_version = '1.4.31'
+        compose_version = '1.0.0-beta03'
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.0-alpha12'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+plugins {
+    id("io.gitlab.arturbosch.detekt").version("1.15.0")
+}
+
+detekt {
+    println "Custom Detekt Config File: $projectDir/config/detekt/detekt.yml"
+    toolVersion = "1.15.0"
+    config = files("$projectDir/config/detekt/detekt.yml")
+    failFast = true // fail build on any finding
+    autoCorrect = true
+    parallel = true
+    buildUponDefaultConfig = true
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        txt.enabled = false
+    }
+}
+
+allprojects {
+    apply plugin: "io.gitlab.arturbosch.detekt"
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
