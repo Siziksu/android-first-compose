@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import com.siziksu.framework.ui.common.components.AppSurface
 import com.siziksu.framework.ui.feature.main.ghibli.components.ListHeader
 import com.siziksu.framework.ui.feature.main.ghibli.components.ListItem
+import com.siziksu.framework.ui.feature.main.ghibli.mapper.toLayerUi
+import com.siziksu.framework.ui.feature.main.ghibli.model.FilmUi
 import com.siziksu.framework.ui.theme.DpUnit
 import com.siziksu.port.model.FilmPort
 import com.siziksu.port.viewmodels.GhibliViewModel
@@ -27,12 +29,12 @@ fun GhibliFeature() {
 @Composable
 private fun FilmsState(model: GhibliViewModel) {
     val films: List<FilmPort> by model.films.collectAsState()
-    GhibliContent(films)
+    GhibliContent(films.map { it.toLayerUi() })
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun GhibliContent(films: List<FilmPort>) {
+private fun GhibliContent(films: List<FilmUi>) {
     Box(
         modifier = Modifier
             .fillMaxWidth()

@@ -2,7 +2,7 @@ package com.siziksu.port.repository.contracts
 
 import com.siziksu.port.model.FilmPort
 
-interface StudioGhibliDataSourceContract {
+interface GhibliDataSourceContract {
 
     suspend fun getFilms(): List<FilmPort>
 }

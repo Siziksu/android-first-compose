@@ -4,7 +4,28 @@ Example of application developed with __Jetpack Compose__.
 
 Regarding architecture, it is implemented with my own interpretation of the __Clean/Hexagonal Architecture__.
 
+In this interpretation, we find the layers (__modules__):
+
+- __Framework__ (UI and DataSources)
+- __Ports and Adapters__ (ViewModels and Repository)
+- __Domain__ (UseCases, Entities)
+
+Libraries in use:
+
+- Kotlin
+- Coroutines
+- Koin
+- Jetpack Compose
+- Navigation
+- Material Icons Extended
+- GMS Play Services Location
+- ViewModel
+- Retrofit
+- JUnit
+- MockK
+
 ## License
+
     Copyright 2021 Esteban Latre
     
     Licensed under the Apache License, Version 2.0 (the "License");

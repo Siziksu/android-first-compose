@@ -1,9 +1,5 @@
 package com.siziksu.port.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
 data class FilmPort(
     val id: String,
     val title: String,
@@ -20,4 +16,4 @@ data class FilmPort(
     val locations: List<String>,
     val vehicles: List<String>,
     val url: String
-) : Parcelable
+)

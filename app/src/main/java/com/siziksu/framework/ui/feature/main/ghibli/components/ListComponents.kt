@@ -11,9 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.siziksu.framework.ui.common.components.AppCard
+import com.siziksu.framework.ui.feature.main.ghibli.model.FilmUi
 import com.siziksu.framework.ui.theme.AppColors
 import com.siziksu.framework.ui.theme.DpUnit
-import com.siziksu.port.model.FilmPort
 
 @Composable
 fun ListHeader(title: String) {
@@ -33,7 +33,7 @@ fun ListHeader(title: String) {
 }
 
 @Composable
-fun ListItem(film: FilmPort) {
+fun ListItem(film: FilmUi) {
     AppCard(modifier = Modifier.padding(horizontal = DpUnit.VALUE_0, vertical = DpUnit.VALUE_5)) {
         Column(modifier = Modifier.padding(horizontal = DpUnit.VALUE_10, vertical = DpUnit.VALUE_10)) {
             Box(

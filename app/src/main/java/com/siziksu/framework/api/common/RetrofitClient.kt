@@ -16,7 +16,7 @@ class RetrofitClient(private val context: Context) {
         return Retrofit.Builder()
             .baseUrl(
                 when (server) {
-                    RetrofitServer.STUDIO_GHIBLI -> STUDIO_GHIBLI_URL
+                    RetrofitServer.GHIBLI -> GHIBLI_URL
                 }
             )
             .client(getOkHttpClient())
@@ -38,7 +38,7 @@ class RetrofitClient(private val context: Context) {
 
     companion object {
 
-        private const val STUDIO_GHIBLI_URL = "https://ghibliapi.herokuapp.com/"
+        private const val GHIBLI_URL = "https://ghibliapi.herokuapp.com/"
         private const val TIMEOUT = 15L
         private const val CACHE_SIZE = 10L * 1024 * 1024 // 10MB
     }
