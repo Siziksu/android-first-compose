@@ -8,3 +8,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Compose"
 include ':app'
+include ':domain'
+include ':port'
