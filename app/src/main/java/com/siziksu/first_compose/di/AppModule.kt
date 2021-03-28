@@ -1,19 +1,21 @@
 package com.siziksu.first_compose.di
 
 import com.google.android.gms.location.LocationServices
-import com.siziksu.first_compose.data.common.RetrofitClient
-import com.siziksu.first_compose.data.common.RetrofitServer
-import com.siziksu.first_compose.data.datasource.api.StudioGhibliApi
-import com.siziksu.first_compose.data.datasource.api.StudioGhibliDataSource
-import com.siziksu.first_compose.data.mapper.FilmsDataToDomain
-import com.siziksu.first_compose.data.repository.StudioGhibliRepository
+import com.siziksu.first_compose.adapters.mapper.FilmsDomainToUi
+import com.siziksu.first_compose.adapters.mapper.FilmsInadToDomain
+import com.siziksu.first_compose.adapters.repository.StudioGhibliRepository
+import com.siziksu.first_compose.adapters.repository.contracts.StudioGhibliDataSourceContract
+import com.siziksu.first_compose.adapters.viewmodels.GhibliViewModel
+import com.siziksu.first_compose.adapters.viewmodels.LocationViewModel
 import com.siziksu.first_compose.domain.common.CoroutineCaseContract
-import com.siziksu.first_compose.domain.model.FilmDomain
-import com.siziksu.first_compose.domain.repository.StudioGhibliRepositoryContract
+import com.siziksu.first_compose.domain.contracts.StudioGhibliContract
+import com.siziksu.first_compose.domain.model.Film
 import com.siziksu.first_compose.domain.usecase.GetStudioGhibliFilms
-import com.siziksu.first_compose.ui.feature.main.ghibli.GhibliViewModel
-import com.siziksu.first_compose.ui.feature.main.ghibli.mapper.FilmsDomainToUi
-import com.siziksu.first_compose.ui.feature.main.location.LocationViewModel
+import com.siziksu.first_compose.framework.api.common.RetrofitClient
+import com.siziksu.first_compose.framework.api.common.RetrofitServer
+import com.siziksu.first_compose.framework.api.ghibli.StudioGhibliApi
+import com.siziksu.first_compose.framework.api.ghibli.StudioGhibliDataSource
+import com.siziksu.first_compose.framework.api.ghibli.mapper.FilmsApiToInad
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -29,16 +31,17 @@ val appModule = module {
     single(named(RETROFIT_STUDIO_GHIBLI)) { RetrofitClient(get()).getRetrofit(RetrofitServer.STUDIO_GHIBLI) }
     single<StudioGhibliApi>(named(API_STUDIO_GHIBLI)) { get<Retrofit>(named(RETROFIT_STUDIO_GHIBLI)).create(StudioGhibliApi::class.java) }
 
-    single { StudioGhibliDataSource(get(named(API_STUDIO_GHIBLI))) }
+    single<StudioGhibliDataSourceContract> { StudioGhibliDataSource(get(named(API_STUDIO_GHIBLI)), get()) }
 
-    single<StudioGhibliRepositoryContract> { StudioGhibliRepository(get(), get()) }
+    single<StudioGhibliContract> { StudioGhibliRepository(get(), get()) }
 
-    factory<CoroutineCaseContract<List<FilmDomain>, GetStudioGhibliFilms.Params>>(named(GET_FILMS_USE_CASE)) { GetStudioGhibliFilms(get()) }
+    factory<CoroutineCaseContract<List<Film>, GetStudioGhibliFilms.Params>>(named(GET_FILMS_USE_CASE)) { GetStudioGhibliFilms(get()) }
 
     single { LocationServices.getFusedLocationProviderClient(androidContext()) }
 
-    single { FilmsDataToDomain() }
+    single { FilmsApiToInad() }
     single { FilmsDomainToUi() }
+    single { FilmsInadToDomain() }
 
     viewModel { GhibliViewModel(get(named(GET_FILMS_USE_CASE)), get()) }
     viewModel { LocationViewModel(get()) }

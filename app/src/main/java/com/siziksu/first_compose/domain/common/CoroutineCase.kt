@@ -12,13 +12,13 @@ abstract class CoroutineCase<R, P> : CoroutineScope, CoroutineCaseContract<R, P>
     private var job = Job()
 
     override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+        get() = Dispatchers.IO + job
 
     override fun run(success: (R) -> Unit, error: (Throwable) -> Unit, params: P) {
         if (job.isCancelled) {
             job = Job()
         }
-        launch(Dispatchers.IO) {
+        launch {
             try {
                 val result = func(params)
                 withContext(Dispatchers.Main) { success(result) }

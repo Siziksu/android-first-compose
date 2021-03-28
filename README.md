@@ -1,5 +1,9 @@
 # Android First Compose
 
+Example of application developed with __Jetpack Compose__.
+
+Regarding architecture, it is implemented with my own interpretation of the __Clean/Hexagonal Architecture__.
+
 ## License
     Copyright 2021 Esteban Latre
     
