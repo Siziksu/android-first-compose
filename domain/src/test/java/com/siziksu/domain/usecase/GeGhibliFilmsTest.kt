@@ -33,10 +33,10 @@ class GeGhibliFilmsTest {
     @Test
     fun `when getGhibliFilms_run() is executed, it returns a list of domain films`() = runBlocking {
         val filmDomainList = getFilmDomainList()
-        val filmList = ArrayList<Film>()
+        val result = ArrayList<Film>()
         coEvery { ghibliRepository.getFilms() } returns filmDomainList
-        getGhibliFilms.run({ filmList.addAll(it) }, {}, GetGhibliFilms.Params())
+        getGhibliFilms.run({ result.addAll(it) }, {}, GetGhibliFilms.Params())
         coVerify { ghibliRepository.getFilms() }
-        assertEquals(filmDomainList, filmList)
+        assertEquals(filmDomainList, result)
     }
 }

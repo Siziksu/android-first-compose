@@ -28,8 +28,8 @@ class GhibliRepositoryTest {
     fun `when ghibliRepository_getFilms() is executed, it returns a list of domain films`() = runBlocking {
         val filmPortList = getFilmPortList()
         coEvery { ghibliDataSource.getFilms() } returns filmPortList
-        val filmDomainList = ghibliRepository.getFilms()
+        val result = ghibliRepository.getFilms()
         coVerify { ghibliDataSource.getFilms() }
-        assertEquals(filmPortList.map { it.toLayerDomain() }, filmDomainList)
+        assertEquals(filmPortList.map { it.toLayerDomain() }, result)
     }
 }

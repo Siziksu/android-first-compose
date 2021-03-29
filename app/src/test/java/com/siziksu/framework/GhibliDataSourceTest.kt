@@ -25,11 +25,11 @@ class GhibliDataSourceTest {
     }
 
     @Test
-    fun `when getGhibliFilms_run() is executed, it returns a list of domain films`() = runBlocking {
+    fun `when ghibliDataSource_getFilms() is executed, it returns a list of port films`() = runBlocking {
         val filmApiList = getFilmApiList()
         coEvery { ghibliApi.getFilms() } returns filmApiList
-        val filmPortList = ghibliDataSource.getFilms()
+        val result = ghibliDataSource.getFilms()
         coVerify { ghibliApi.getFilms() }
-        assertEquals(filmApiList.map { it.toLayerPort() }, filmPortList)
+        assertEquals(filmApiList.map { it.toLayerPort() }, result)
     }
 }

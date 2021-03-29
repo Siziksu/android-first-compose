@@ -5,7 +5,7 @@ import java.util.ArrayList
 
 fun getFilmDomainList(): List<Film> {
     val list = ArrayList<Film>()
-    for (i in 0 until 10) {
+    for (i in 0 until 2) {
         list.add(getFilmDomain())
     }
     return list
